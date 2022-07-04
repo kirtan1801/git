@@ -8,7 +8,6 @@ pipeline{
 	  stage("build"){
 		  steps{
 			  echo 'building the application'
-			  sh 'make'
 			  archiveArtifacts artifacts: '**/target/*.jar', fingerprint: true
 		  }
 	  }
@@ -20,7 +19,6 @@ pipeline{
 		  }
 		  steps{
 			  echo 'testing the application'
-			  sh 'make check || true'
 			  junit '**/target/*.xml'
 		  }
 	  }
@@ -33,7 +31,6 @@ pipeline{
 		  steps{
 			  echo 'deploying the application'
 			  echo "deploying version ${params.VERSION}"
-			  sh 'make publish'
 		  }
 	  }
 	}  
